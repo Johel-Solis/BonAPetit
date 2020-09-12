@@ -23,18 +23,16 @@ final class CreatePlateUseCase
     }
 
     public function __invoke(
-        int $plateId,
         string $plateName,
         string $plateDescription,
         int $platePrecio
     ): void
     {
-        $id             = new PlateId($plateId);
         $name              = new PlateName($plateName);
-        $description = new PlateDescription($plateDescription);
-        $precio          = new PlatePrecio($platePrecio);
+        $description       = new PlateDescription($plateDescription);
+        $precio            = new PlatePrecio($platePrecio);
 
-        $plate = Plate::create($id, $name, $description, $precio);
+        $plate = Plate::create( $name, $description, $precio);
 
         $this->repository->save($plate);
     }

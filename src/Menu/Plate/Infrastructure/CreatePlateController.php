@@ -21,25 +21,19 @@ final class CreatePlateController
 
     public function __invoke(Request $request)
     {
-        $plateId     = $request->input('id');
         $plateName              = $request->input('name');
-        $plateDescription             = $request->input('description');
-        $platePrecio          = $request->input('precio');
+        $plateDescription       = $request->input('description');
+        $platePrecio            = $request->input('precio');
         
 
         $createPlateUseCase = new CreatePlateUseCase($this->repository);
         $createPlateUseCase->__invoke(
-            $plateId,
             $plateName,
             $plateDescription,
             $platePrecio
-            
         );
 
-        $getPlateByCriteriaUseCase = new GetPlateByCriteriaUseCase($this->repository);
-        $newPlate                  = $getPlateByCriteriaUseCase->__invoke($plateId, $plateName);
 
-        return $newPlate;
     }
 }
 ?>

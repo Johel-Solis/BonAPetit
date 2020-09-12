@@ -19,13 +19,11 @@ final class Plate
     
 
     public function __construct(
-        PlateId $id,
         PlateName $name,
         PlateDescription $description,
         PlatePrecio $precio
     )
     {
-        $this->id                = $id;
         $this->name              = $name;
         $this->description       = $description;
         $this->precio            = $precio;
@@ -52,17 +50,19 @@ final class Plate
     {
         return $this->precio;
     }
-
+    public function setId(PlateId $cod) : void
+    {
+        $this->id=$cod;
+    } 
     
 
     public static function create(
-        PlateId $id,
         PlateName $name,
         PlateDescription $description,
         PlatePrecio $precio  
     ): Plate
     {
-        $plate = new self($id, $name, $description, $precio);
+        $plate = new self( $name, $description, $precio);
 
         return $plate;
     }

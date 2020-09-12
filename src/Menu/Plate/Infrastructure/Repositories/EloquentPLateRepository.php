@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Src\Menu\Plate\Infrastructure\Repositories;
 
-use App\User as EloquentUserModel;
+use App\Plate as EloquentPlateModel;
 use Src\Menu\Plate\Domain\Contracts\PlateRepositoryContract;
 use Src\Menu\Plate\Domain\Plate;
 use Src\Menu\Plate\Domain\ValueObjects\PlateId;
@@ -15,21 +15,20 @@ use Src\Menu\Plate\Domain\ValueObjects\PlatePrecio;
 
 final class EloquentPlateRepository implements PlateRepositoryContract
 {
-    private $eloquentUserModel;
+    private $eloquentPlaterModel;
 
     public function __construct()
     {
-        $this->eloquentUserModel = new EloquentUserModel;
+        $this->eloquentPlateModel = new EloquentPlateModel;
     }
 
 
 
     public function save(Plate $plate): void
     {
-        $newPlate = $this->eloquentUserModel;
+        $newPlate = $this->eloquentPlateModel;
 
         $data = [
-            'id'              => $plate->id()->value(),
             'name'             => $plate->name()->value(),
             'description' => $plate->description()->value(),
             'precio'          => $plate->precio()->value()

@@ -29,7 +29,7 @@ final class PlatePrecio
     {
         $options = array(
             'options' => array(
-                'min_range' => 100,
+                'min_range' => 0,
             )
         );
 
