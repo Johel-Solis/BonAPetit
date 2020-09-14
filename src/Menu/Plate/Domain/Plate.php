@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace src\Menu\Plate\Domain;
+namespace Src\Menu\Plate\Domain;
 
-use src\Menu\Plate\Domain\ValueObjects\PlateName;
-use src\Menu\Plate\Domain\ValueObjects\PlateId;
-use src\Menu\Plate\Domain\ValueObjects\PlateDescription;
-use src\Menu\Plate\Domain\ValueObjects\PlatePrecio;
+use Src\Menu\Plate\Domain\ValueObjects\PlateName;
+use Src\Menu\Plate\Domain\ValueObjects\PlateId;
+use Src\Menu\Plate\Domain\ValueObjects\PlateDescription;
+use Src\Menu\Plate\Domain\ValueObjects\PlatePrecio;
 
 
 final class Plate
@@ -50,9 +50,9 @@ final class Plate
     {
         return $this->precio;
     }
-    public function setId(PlateId $cod) : void
+    public function setId(PlateId $id) : void
     {
-        $this->id=$cod;
+        $this->id=$id;
     } 
     
 
@@ -60,11 +60,10 @@ final class Plate
         PlateName $name,
         PlateDescription $description,
         PlatePrecio $precio  
-    ): Plate
+    ): self
     {
         $plate = new self( $name, $description, $precio);
 
         return $plate;
     }
 }
-?>

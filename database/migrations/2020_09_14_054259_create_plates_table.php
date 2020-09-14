@@ -14,11 +14,11 @@ class CreatePlatesTable extends Migration
     public function up()
     {
         Schema::create('plates', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('name');
             $table->string('description');
             $table->integer('precio');
-            $table->timestamps();
+            
         });
     }
 

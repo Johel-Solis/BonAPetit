@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace src\Menu\Plate\Domain\ValueObjects;
+namespace Src\Menu\Plate\Domain\ValueObjects;
 
 use InvalidArgumentException;
 
@@ -46,4 +46,3 @@ final class PlatePrecio
     }
 
 }
-?>

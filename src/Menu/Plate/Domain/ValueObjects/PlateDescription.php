@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace src\Menu\Plate\Domain\ValueObjects;
+namespace Src\Menu\Plate\Domain\ValueObjects;
 use InvalidArgumentException;
 
 final class PlateDescription
@@ -11,7 +11,7 @@ final class PlateDescription
 
     public function __construct(string $description)
     {
-        $this->validate($description);
+        //$this->validate($description);
         $this->value = $description;
     }
 
@@ -34,4 +34,3 @@ final class PlateDescription
 
 
 
-?>

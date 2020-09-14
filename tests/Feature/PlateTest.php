@@ -8,6 +8,7 @@ use Tests\TestCase;
 
 class PlateTest extends TestCase
 {
+    use RefreshDatabase;
     /**
      * A basic feature test example.
      *
@@ -15,16 +16,16 @@ class PlateTest extends TestCase
      */
     public function testExample()
     {
-        $response = $this->postJson('/api/plate', $this->data());
-        $response ->assertStatus(200);
+        
+
+        $response = $this->get('miapp');
+
+        $response
+            ->assertStatus(200);
         
     }
-    private function data()
-    {
-        return [
-            'name' => "plato fit",
-            'description' => "sopa de verduras",
-            'precio' => 11000
-        ];
-    }
+    
+        
+     
+    
 }

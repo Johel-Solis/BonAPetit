@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Plate extends Model
 {
-    //
     protected $table = 'plates';
     
     protected $fillable = [
@@ -14,4 +13,5 @@ class Plate extends Model
     ];
     
     protected $guarded = ['id'];
+    public $timestamps = false;
 }
