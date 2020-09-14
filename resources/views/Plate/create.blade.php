@@ -30,22 +30,72 @@
                 </form><a class="btn btn-light action-button" role="button" href="#" style="background: rgb(230,208,13);font-size: 17px;">Iniciar Sesión</a></div>
             <div></div>
         </div>
+
+        
     </nav>
+    
+
     <div class="login-clean row justify-content-center" style="background-image:url('{{ asset('assets/img/fondo_plato.jpg') }}')";>
-        <div></div>
-        <form action="/plate" method="POST" class="justify-content-center" style="margin: 56px;width: 374px;height: 490px;padding: 29px;">
+    
+    
+        
+        <form action="/plate" method="POST" class="justify-content-center" style="margin: 56px;width: 374px;height: 490px;padding: 29px;" enctype="multipart/form-data">
             <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
         
             <h2 class="sr-only">Login Form</h2>
             <div class="illustration" style="width: 141px;"><i class="icon ion-ios-navigate" style="color: rgb(247,204,52);border-color: rgb(230,208,13);"></i></div>
             <div class="form-group">
-                <input class="form-control" type="text" name="name" placeholder="Nombre">
+               
+
+                <input class="form-control" type="text" name="name" placeholder="Nombre" >
+                @error('name')
+                    <div class="aler alert-danger">
+                        El campo Nombre es obligatorio
+                    </div>
+                @enderror
+                
                 <input class="form-control" type="text" name="description" placeholder="Descripcion">
+                @error('description')
+                    <div class="aler alert-danger">
+                        El campo Descripcion es obligatorio
+                    </div>
+                @enderror
                 <input class="form-control" type="number" onkeydown="javascript: return event.keyCode === 8 || event.keyCode === 46 ? true : !isNaN(Number(event.key))" name="precio" placeholder="Precio">
+                @error('precio')
+                <div class="aler alert-danger">
+                    El campo Precio es obligatorio
+                </div>
+                @enderror
             </div>
+           
+            <input type="file" style="width: 270px;height: 45px;"  name="foto">
+                @error('foto')
+                <div class="aler alert-danger">
+                    Debe cargar una foto del plato
+                </div>
+                @enderror
                 <div class="form-group"><button class="btn btn-primary btn-block" type="submit" style="background: rgb(230,208,13);height: 50px;width: 152px;margin: 14px;padding: -4px;font-size: 16px;">Guardar Plato</button>
                 </div>
         </form>
+        <div class="">
+    @if(session('msj'))
+        <div class="notification alert alert-success" role="alert"> {{ session('msj')}}</div>
+        @endif
+    @if(count($errors)>0)
+            
+
+            <ul>
+                @foreach($errors->all() as $error)
+                <div class="notification alert alert-danger" role="alert">
+                
+                    <li>{{$error}}</li>
+                    </div>
+                @endforeach
+            </ul>
+            
+        @endif
+    </div>
+
     </div>
 
     <div class="footer-clean" >

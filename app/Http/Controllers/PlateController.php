@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Plate;
 use Illuminate\Http\Request;
+use App\Http\Requests\PlateRequest;
 use Src\Menu\Plate\Infrastructure\CreatePlateController;
 
 class PlateController extends Controller
@@ -38,12 +39,17 @@ class PlateController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PlateRequest $request)
     {
-       
+
+       $plate= new Plate($request->all());
         $createPlateController= new CreatePlateController();
         $createPlateController->__invoke($request);
-        return redirect()->route('plate');
+        
+        $data =array();
+        return redirect()->route("plate.create")
+                ->with('msj','Plato registro exitoso');
+
     }
 
     /**
