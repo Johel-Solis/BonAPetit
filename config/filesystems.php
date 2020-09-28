@@ -54,6 +54,10 @@ return [
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
+        'imgPlate' => [
+            'driver' => 'local',
+            'root' => public_path().'/PlatePhotos',
+        ],
 
         's3' => [
             'driver' => 's3',

@@ -8,6 +8,7 @@ use Src\Menu\Plate\Domain\ValueObjects\PlateName;
 use Src\Menu\Plate\Domain\ValueObjects\PlateId;
 use Src\Menu\Plate\Domain\ValueObjects\PlateDescription;
 use Src\Menu\Plate\Domain\ValueObjects\PlatePrecio;
+use Src\Menu\Plate\Domain\ValueObjects\PlatePhoto;
 
 
 final class Plate
@@ -16,17 +17,20 @@ final class Plate
     private $name;
     private $description;
     private $precio;
+    private $photo;
     
 
     public function __construct(
         PlateName $name,
         PlateDescription $description,
-        PlatePrecio $precio
+        PlatePrecio $precio,
+        PlatePhoto $photo
     )
     {
         $this->name              = $name;
         $this->description       = $description;
         $this->precio            = $precio;
+        $this->photo            =$photo;
         
     }
 
@@ -50,6 +54,11 @@ final class Plate
     {
         return $this->precio;
     }
+    public function photo(): PlatePhoto
+    {
+        return $this->photo;
+    }
+
     public function setId(PlateId $id) : void
     {
         $this->id=$id;
@@ -59,10 +68,11 @@ final class Plate
     public static function create(
         PlateName $name,
         PlateDescription $description,
-        PlatePrecio $precio  
+        PlatePrecio $precio, 
+        PlatePhoto $photo
     ): self
     {
-        $plate = new self( $name, $description, $precio);
+        $plate = new self( $name, $description, $precio,$photo);
 
         return $plate;
     }

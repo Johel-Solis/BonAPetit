@@ -11,7 +11,7 @@ final class PlateDescription
 
     public function __construct(string $description)
     {
-        //$this->validate($description);
+        $this->validate($description);
         $this->value = $description;
     }
 

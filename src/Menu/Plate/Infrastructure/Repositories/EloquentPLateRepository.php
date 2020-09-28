@@ -26,6 +26,7 @@ final class EloquentPlateRepository implements PlateRepositoryContract
         $newPlate->name          =$plate->name()->value();
         $newPlate->description   =$plate->description()->value();
         $newPlate->precio        =$plate->precio()->value();
+        $newPlate->photo         =$plate->photo()->value();
 
         $newPlate->save();
     }

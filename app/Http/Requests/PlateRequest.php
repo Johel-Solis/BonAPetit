@@ -29,7 +29,7 @@ class PlateRequest extends FormRequest
             'name'=>'required|regex:/^[\pL\s\-]+$/u|min:1|max:20|unique:plates,name',
             'description'=>'required|min:10|string',
             'precio'=>'required|integer|min:0',
-            'foto'=>'required|image|mimes:jpg,jpeg,png'
+            'photo'=>'required|image|mimes:jpg,jpeg,png'
 
         ];
 
@@ -43,9 +43,9 @@ class PlateRequest extends FormRequest
             'name.min'=>'El campo Nombre deber tener al menos un caracter',
             'name.max'=>'El campo Nombre no deber tener más de 20 caracteres',
             'name.unique'=>'El nombre digitado ya existe',
-            'foto.required'=> 'Debe cargar una foto',
-            'foto.imae'=>'El archivo debe ser una imagen',
-            'foto.mimes'=>'El archivo debe tener extension jpg,jpeg o png',
+            'photo.required'=> 'Debe cargar una foto',
+            'photo.imae'=>'El archivo debe ser una imagen',
+            'photo.mimes'=>'El archivo debe tener extension jpg,jpeg o png',
             'description.required'=>'El campo Descripción es obligatorio',
             'description.min'=>'El campo descripcion debe tener al menos 10 caracteres',
             'precio.required'=>'El campo precio es obligatorio',

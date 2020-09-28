@@ -68,8 +68,8 @@
                 @enderror
             </div>
            
-            <input type="file" style="width: 270px;height: 45px;"  name="foto">
-                @error('foto')
+            <input type="file" style="width: 270px;height: 45px;"  name="photo" id="photo">
+                @error('photo')
                 <div class="aler alert-danger">
                     Debe cargar una foto del plato
                 </div>
@@ -78,22 +78,24 @@
                 </div>
         </form>
         <div class="">
-    @if(session('msj'))
-        <div class="notification alert alert-success" role="alert"> {{ session('msj')}}</div>
-        @endif
-    @if(count($errors)>0)
-            
+            @if(session('msj'))
+                <div class="notification alert alert-success" role="alert"> {{ session('msj')}}</div>
+                @endif
+            @if(count($errors)>0)
+                    
 
-            <ul>
-                @foreach($errors->all() as $error)
-                <div class="notification alert alert-danger" role="alert">
-                
-                    <li>{{$error}}</li>
-                    </div>
-                @endforeach
-            </ul>
-            
-        @endif
+                    <ul>
+                        @foreach($errors->all() as $error)
+                        <div class="notification alert alert-danger" role="alert">
+                        
+                            <li>{{$error}}</li>
+                            </div>
+                        @endforeach
+                    </ul>
+                    
+                @endif
+     </div>
+     <div id="imagPrev">
     </div>
 
     </div>
@@ -127,6 +129,25 @@
     </div>
     <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script >
+    (function(){
+        function filePreview(input){
+            if(input.files && input.files[0]){
+                var reader = new FileReader();
+                reader.onload = function(e){
+                    $('#imagPrev').html("<img src='"+e.target.result+"' id='imgPre'/>");
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $('#photo').change(function(){
+            filePreview(this);
+
+        });
+
+    })();
+    </script>
+
 </body>
 
 </html>

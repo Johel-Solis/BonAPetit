@@ -9,7 +9,7 @@ class Plate extends Model
     protected $table = 'plates';
     
     protected $fillable = [
-        'name', 'description', 'precio',
+        'name', 'description', 'precio','photo',
     ];
     
     protected $guarded = ['id'];

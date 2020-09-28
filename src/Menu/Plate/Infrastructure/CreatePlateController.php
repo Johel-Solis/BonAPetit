@@ -7,6 +7,8 @@ namespace Src\Menu\Plate\Infrastructure;
 use Illuminate\Http\Request;
 use Src\Menu\Plate\Application\CreatePlateUseCase;
 use Src\Menu\PLate\Infrastructure\Repositories\EloquentPLateRepository;
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Facades\Storage;
 
 final class CreatePlateController
 {
@@ -22,9 +24,13 @@ final class CreatePlateController
         $plateName              = $request->input('name');
         $plateDescription       = $request->input('description');
         $platePrecio            = (int)$request->input('precio');
+        $photo                  = $request->file('photo');
+        $photoName              =$photo->getClientOriginalName();
         
+        Storage::disk('imgPlate')->put($photoName,  $photo);
+        $platePhoto =Storage::url($photoName);
         $createPlateUseCase = new CreatePlateUseCase($this->repository);
-        $createPlateUseCase->__invoke($plateName, $plateDescription, $platePrecio);
+        $createPlateUseCase->__invoke($plateName, $plateDescription, $platePrecio, $platePhoto);
 
 
     }
