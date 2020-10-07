@@ -36,14 +36,16 @@
     
 
     <div class="login-clean row justify-content-center" style="background-image:url('{{ asset('assets/img/fondo_plato.jpg') }}')";>
-    
-    
+    <div>
         
-        <form action="/plate" method="POST" class="justify-content-center" style="margin: 56px;width: 374px;height: 490px;padding: 29px;" enctype="multipart/form-data">
+    </div>
+    
+     
+        <form action="/plate" method="POST" class="justify-content-center" style="margin: 56px;width: 440px;height:auto;padding: 29px;" enctype="multipart/form-data">
             <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
-        
-            <h2 class="sr-only">Login Form</h2>
-            <div class="illustration" style="width: 141px;"><i class="icon ion-ios-navigate" style="color: rgb(247,204,52);border-color: rgb(230,208,13);"></i></div>
+            <h3 style="margin-bottom: 0px">Registrar Plato Especial</h3>
+            <div class="illustration" style="width: 121px; height:121px; margin-top: 0px; ">
+                <span class="iconify" data-icon="openmoji:fork-and-knife-with-plate" data-inline="false"style="margin-top: 0px; color: rgb(247,204,52);border-color: rgb(230,208,13);"></span></div>
             <div class="form-group">
                
 
@@ -66,17 +68,21 @@
                     El campo Precio es obligatorio
                 </div>
                 @enderror
-            </div>
-           
-            <input type="file" style="width: 270px;height: 45px;"  name="photo" id="photo">
+                
+                 <input type="file" style="width: 270px;height: 45px;"  name="photo" id="photo">
                 @error('photo')
                 <div class="aler alert-danger">
                     Debe cargar una foto del plato
                 </div>
                 @enderror
+                <div id="imagPrev">
+                </div>
+            </div>
+           
                 <div class="form-group"><button class="btn btn-primary btn-block" type="submit" style="background: rgb(230,208,13);height: 50px;width: 152px;margin: 14px;padding: -4px;font-size: 16px;">Guardar Plato</button>
                 </div>
         </form>
+        
         <div class="">
             @if(session('msj'))
                 <div class="notification alert alert-success" role="alert"> {{ session('msj')}}</div>
@@ -95,8 +101,7 @@
                     
                 @endif
      </div>
-     <div id="imagPrev">
-    </div>
+
 
     </div>
 
@@ -129,6 +134,7 @@
     </div>
     <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
     <script >
     (function(){
         function filePreview(input){

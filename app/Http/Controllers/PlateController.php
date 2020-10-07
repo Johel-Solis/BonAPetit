@@ -6,6 +6,8 @@ use App\Plate;
 use Illuminate\Http\Request;
 use App\Http\Requests\PlateRequest;
 use Src\Menu\Plate\Infrastructure\CreatePlateController;
+use Src\Menu\Plate\Infrastructure\DeletePlateController;
+use Src\Menu\Plate\Infrastructure\ListPlateController;
 
 class PlateController extends Controller
 {
@@ -16,8 +18,9 @@ class PlateController extends Controller
      */
     public function index()
     {
-        $data =array();
-        return response()->view("plate/",$data,200);
+        $listPlateController= new ListPlateController();
+        $plates=$listPlateController->__invoke();
+        return view('plate.index')->with('plates', $plates);
     }
 
     /**
@@ -47,7 +50,7 @@ class PlateController extends Controller
         $createPlateController->__invoke($request);
         
         $data =array();
-        return redirect()->route("plate.create")
+        return redirect()->route("plate.index")
                 ->with('msj','Plato registro exitoso');
 
     }
@@ -94,6 +97,12 @@ class PlateController extends Controller
      */
     public function destroy(Plate $plate)
     {
-        //
+        $deletePlateController= new deletePlateController();
+        $deletePlateController->__invoke($plate->id(),$plate->photo);
+        
+        $data =array();
+        return redirect()->route("plate.create")
+                ->with('msj','Plato registro exitoso');
+
     }
 }

@@ -56,7 +56,9 @@ return [
         ],
         'imgPlate' => [
             'driver' => 'local',
-            'root' => public_path().'/PlatePhotos',
+            'root' => storage_path('app/public/PlatePhotos'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
         ],
 
         's3' => [

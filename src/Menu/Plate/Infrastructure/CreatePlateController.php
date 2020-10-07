@@ -25,12 +25,14 @@ final class CreatePlateController
         $plateDescription       = $request->input('description');
         $platePrecio            = (int)$request->input('precio');
         $photo                  = $request->file('photo');
-        $photoName              =$photo->getClientOriginalName();
+        $photoName              = time().'_'.$photo->getClientOriginalName();
+        $platePhoto             = public_path().'/plateFotos';
+        $photo->move($platePhoto, $photoName);
+
         
-        Storage::disk('imgPlate')->put($photoName,  $photo);
-        $platePhoto =Storage::url($photoName);
+        
         $createPlateUseCase = new CreatePlateUseCase($this->repository);
-        $createPlateUseCase->__invoke($plateName, $plateDescription, $platePrecio, $platePhoto);
+        $createPlateUseCase->__invoke($plateName, $plateDescription, $platePrecio, '/plateFotos/'.$photoName);
 
 
     }

@@ -7,15 +7,18 @@ namespace Src\Menu\Plate\Infrastructure\Repositories;
 use App\Plate as EloquentPlateModel;
 use Src\Menu\Plate\Domain\Contracts\PlateRepositoryContract;
 use Src\Menu\Plate\Domain\Plate;
+use Src\Menu\Plate\Domain\ValueObjects\PlateId;
+
 
 final class EloquentPlateRepository implements PlateRepositoryContract
 {
-   
+   private $eloquentPlateModel;
  /**
     *  __Construct method
     */
     public function __construct()
     {
+        $this->eloquentPlateModel= new EloquentPlateModel();
     }
 
 
@@ -29,6 +32,34 @@ final class EloquentPlateRepository implements PlateRepositoryContract
         $newPlate->photo         =$plate->photo()->value();
 
         $newPlate->save();
+    }
+
+
+    public function update(PlateId $plateId,Plate $plate): void
+    {
+        $plateToUpdate = new EloquentPlateModel();
+        
+
+        $data = [
+            'name'          =>$plate->name()->value(),
+            'description'   =>$plate->description()->value(),
+            'precio'        =>$plate->precio()->value(),
+            'photo'         =>$plate->photo()->value(),
+        ];
+
+        $plateToUpdate
+            ->findOrFail($plateId->value())
+            ->update($data);
+
+    }
+    public function list(){
+        return $this->eloquentPlateModel::paginate(15);
+    }
+    public function delete(PlateId $plateId): void{
+        
+        $this->eloquentPlateModel->findOrFail($plateId->value())
+            ->delete();
+        
     }
 
    
