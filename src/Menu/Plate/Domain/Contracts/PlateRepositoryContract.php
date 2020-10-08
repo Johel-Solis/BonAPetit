@@ -12,7 +12,9 @@ interface PlateRepositoryContract
     public function save(Plate $plate): void;
     public function update(PlateId $plateId,Plate $plate): void;
     public function list(); 
-    public function delete(PlateId $plateId): void;
+    public function find(PlateId $plateId); 
+    public function delete(PlateId $plateId);
+
     
     
 

@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Src\Menu\Plate\Infrastructure;
 
 use Illuminate\Http\Request;
-use Src\Menu\Plate\Application\CreatePlateUseCase;
+use Src\Menu\Plate\Application\DeletePlateUseCase;
 use Src\Menu\PLate\Infrastructure\Repositories\EloquentPLateRepository;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Storage;
@@ -19,12 +19,14 @@ final class DeletePlateController
         $this->repository = new EloquentPlateRepository();
     }
 
-    public function __invoke(int $PlateId,string $photo)
+    public function __invoke(int $id)
     {
         
-        //Storage::delete('file.jpg');
-        $deleteUseCase = new DeleteUserUseCase($this->repository);
-        $deleteUserUseCase->__invoke($userId);
-        Storage::disk('imgPlate')->delete($photo);
+      
+        $deletePlateUseCase = new DeletePlateUseCase($this->repository);
+        $photo=$deletePlateUseCase->__invoke($id);
+        $platePhoto             = public_path().$photo;
+        unlink($platePhoto);
+        
     }
 }

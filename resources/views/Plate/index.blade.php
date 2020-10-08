@@ -39,6 +39,9 @@
         
             <div class="col-md-12">
                 <h2 style="text-align: center; font-weight: bold; margin-top: 30px;">LISTA DE PLATOS ESPECIALES</h2>
+                @if(session('msj'))
+                <div class="notification alert alert-success" role="alert"> {{ session('msj')}}</div>
+                @endif
                 <div class="table-responsive">
 
                 
@@ -65,8 +68,8 @@
                                 <td>${{$plate->precio}}</td>
                                 <td><img style="border: ridge; width: 250px; height: auto;" src="{{asset($plate->photo)}}"></td>
                                 <td>
-                                   <a href="{{ url('/pasteles/'.$pastel->id.'/edit') }}" class="btn btn-default"><em class="fa fa-pencil"></em></a>
-                                    <a class="btn btn-danger"><em class="fa fa-trash"></em></a>
+                                   <a href="{{action('PlateController@edit', $plate->id)}}" class="btn btn-default"><em class="fa fa-pencil"></em></a>
+                                    <a href="{{ url('plate/destroy',$plate->id) }}" onclick="return confirm('¿Esta seguro?')"class="btn btn-danger"><em class="fa fa-trash"></em></a>
                                 </td>
                                
                             </tr>

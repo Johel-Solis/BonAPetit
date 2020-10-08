@@ -18,3 +18,5 @@ Route::get('/', function () {
 });
 
 Route::resource('plate','PlateController');
+
+Route::get('plate/destroy/{id}', 'PlateController@destroy');

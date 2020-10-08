@@ -8,7 +8,7 @@ namespace Src\Menu\Plate\Application;
 use Src\Menu\Plate\Domain\Contracts\PlateRepositoryContract;
 use Src\Menu\Plate\Domain\ValueObjects\PlateId;
 
-final class DeletePlateUseCase
+final class FindPlateUseCase
 {
     private $repository;
 
@@ -22,6 +22,6 @@ final class DeletePlateUseCase
     {
         $plateId = new PlateId($id);
 
-         return $this->repository->delete($plateId);
+         return $this->repository->find($plateId);
     }
 }

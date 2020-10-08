@@ -8,6 +8,8 @@ use App\Http\Requests\PlateRequest;
 use Src\Menu\Plate\Infrastructure\CreatePlateController;
 use Src\Menu\Plate\Infrastructure\DeletePlateController;
 use Src\Menu\Plate\Infrastructure\ListPlateController;
+use Src\Menu\Plate\Infrastructure\FindPlateController;
+use Src\Menu\Plate\Infrastructure\UpdatePlateController;
 
 class PlateController extends Controller
 {
@@ -33,6 +35,7 @@ class PlateController extends Controller
         // 
         $data =array();
         return response()->view("plate/create",$data,200);
+        
 
     }
 
@@ -49,7 +52,7 @@ class PlateController extends Controller
         $createPlateController= new CreatePlateController();
         $createPlateController->__invoke($request);
         
-        $data =array();
+        
         return redirect()->route("plate.index")
                 ->with('msj','Plato registro exitoso');
 
@@ -72,9 +75,11 @@ class PlateController extends Controller
      * @param  \App\Plate  $plate
      * @return \Illuminate\Http\Response
      */
-    public function edit(Plate $plate)
+    public function edit(int $id)
     {
-        //
+        $findPlateController= new FindPlateController();
+        $plate=$findPlateController->__invoke($id);
+        return view('plate/edit')->with('plate', $plate);
     }
 
     /**
@@ -84,8 +89,36 @@ class PlateController extends Controller
      * @param  \App\Plate  $plate
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Plate $plate)
+    public function update(Request $request, int $id)
     {
+        $findPlateController= new FindPlateController();
+        $plate=$findPlateController->__invoke($id);
+        if ($plate->name==$request->input('name')) {
+
+            $this->validate($request,['name'=>'required|regex:/^[\pL\s\-]+$/u|min:1|max:20']);
+        }else
+        {
+            $this->validate($request,['name'=>'required|regex:/^[\pL\s\-]+$/u|min:1|max:20|unique:plates,name']);
+
+        }
+        if ($request->file('photo')!= NULL) {
+            
+            $this->validate($request,['description'=>'required|min:10|string',
+            'precio'=>'required|integer|min:0','photo'=>'required|image|mimes:jpg,jpeg,png']);    
+                
+        }else
+        {
+            $this->validate($request,['description'=>'required|min:10|string',
+            'precio'=>'required|integer|min:0',]);
+
+            
+        }
+        $updatePlateController= new UpdatePlateController();
+        $updatePlateController->__invoke($plate->id, $plate->photo, $request);
+        
+        return redirect()->route("plate.index")
+        ->with('msj','Plato modificacion exitosa');
+        
         //
     }
 
@@ -95,14 +128,13 @@ class PlateController extends Controller
      * @param  \App\Plate  $plate
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Plate $plate)
+    public function destroy(int $id)
     {
         $deletePlateController= new deletePlateController();
-        $deletePlateController->__invoke($plate->id(),$plate->photo);
+        $deletePlateController->__invoke($id);
         
-        $data =array();
-        return redirect()->route("plate.create")
-                ->with('msj','Plato registro exitoso');
+        return redirect()->route("plate.index")
+           ->with('msj','Plato eliminacion exitosa');
 
     }
 }

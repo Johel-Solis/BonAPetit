@@ -55,12 +55,22 @@ final class EloquentPlateRepository implements PlateRepositoryContract
     public function list(){
         return $this->eloquentPlateModel::paginate(15);
     }
-    public function delete(PlateId $plateId): void{
+    public function find(PlateId $plateId)
+    {
+        $plate= $this->eloquentPlateModel->findOrFail($plateId->value());
+         return $plate;
+         
+     }
+ 
+    public function delete(PlateId $plateId){
         
-        $this->eloquentPlateModel->findOrFail($plateId->value())
-            ->delete();
+       $plate= $this->eloquentPlateModel->findOrFail($plateId->value());
+        $photo= $plate->photo;
+        $plate->delete();
+        return $photo;
         
     }
+
 
    
    
