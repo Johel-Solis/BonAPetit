@@ -5,7 +5,7 @@ namespace Src\Menu\Plate\Infrastructure;
 
 use Illuminate\Http\Request;
 use Src\Menu\Plate\Application\DeletePlateUseCase;
-use Src\Menu\PLate\Infrastructure\Repositories\EloquentPLateRepository;
+use Src\Menu\PLate\Infrastructure\Repositories\EloquentPlateRepository;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Storage;
 use Src\Menu\Plate\Domain\ValueObjects\PlatePhoto;
