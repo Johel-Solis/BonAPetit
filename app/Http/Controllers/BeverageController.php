@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Src\Menu\Beverage\Infrastructure\CreateBeverageController;
+
 use Src\Menu\Beverage\Infrastructure\DeleteBeverageController;
-use Src\Menu\Beverage\Infrastructure\ListBeverageController;
-use Src\Menu\Beverage\Infrastructure\FindBeverageController;
+
 
 
 class BeverageController extends Controller
@@ -40,15 +39,8 @@ class BeverageController extends Controller
     public function store(Request $request)
     {
         //
-        $Beverage= new Beverage($request->all());
-        $createBeverageController= new CreateBeverageController();
-        $createBeverageController->__invoke($request);
         
-        
-        return redirect()->route("Beverage.index")
-                ->with('msj','Bebida registro exitoso');
     }
-
     /**
      * Display the specified resource.
      *
@@ -91,6 +83,11 @@ class BeverageController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $deleteBeverageController= new deleteBeverageController();
+        $deleteBeverageController->__invoke($id);
+        
+        return redirect()->route("compPlate.index")
+           ->with('msj','Bebida eliminacion exitosa');
+
     }
 }

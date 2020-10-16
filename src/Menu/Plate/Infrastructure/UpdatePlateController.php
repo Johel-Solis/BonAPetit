@@ -6,7 +6,7 @@ namespace Src\Menu\Plate\Infrastructure;
 use Illuminate\Http\Request;
 use Src\Menu\Plate\Application\UpdatePlateUseCase;
 use Src\Menu\Plate\Domain\Plate;
-use Src\Menu\PLate\Infrastructure\Repositories\EloquentPLateRepository;
+use Src\Menu\Plate\Infrastructure\Repositories\EloquentPlateRepository;
 
 final class UpdatePlateController
 {

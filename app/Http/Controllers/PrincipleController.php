@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Src\Menu\Principle\Infrastructure\CreatePrincipleController;
 use Src\Menu\Principle\Infrastructure\DeletePrincipleController;
-use Src\Menu\Principle\Infrastructure\ListPrincipleController;
-use Src\Menu\Principle\Infrastructure\FindPrincipleController;
+
 
 class PrincipleController extends Controller
 {
@@ -40,12 +38,7 @@ class PrincipleController extends Controller
     {
         //
         
-        $createPrincipleController= new CreatePrincipleController();
-        $createPrincipleController->__invoke($request);
-        
-        
-        return redirect()->route("Principle.index")
-                ->with('msj','Principio registro exitoso');
+      
     }
 
     /**
@@ -90,6 +83,11 @@ class PrincipleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $deletePrincipleController= new deletePrincipleController();
+        $deletePrincipleController->__invoke($id);
+        
+        return redirect()->route("compPlate.index")
+           ->with('msj','Principio eliminacion exitosa');
+  //
     }
 }

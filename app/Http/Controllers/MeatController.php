@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Src\Menu\Meat\Infrastructure\CreateMeatController;
 use Src\Menu\Meat\Infrastructure\DeleteMeatController;
 use Src\Menu\Meat\Infrastructure\ListMeatController;
 use Src\Menu\Meat\Infrastructure\FindMeatController;
@@ -40,12 +39,7 @@ class MeatController extends Controller
     {
         //
         
-        $createMeatController= new CreateMeatController();
-        $createMeatController->__invoke($request);
-        
-        
-        return redirect()->route("Meat.index")
-                ->with('msj','Plato registro exitoso');
+       
     }
 
     /**
@@ -90,6 +84,11 @@ class MeatController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $deleteMeatController= new deleteMeatController();
+        $deleteMeatController->__invoke($id);
+        
+        return redirect()->route("compPlate.index")
+           ->with('msj','Carne eliminacion exitosa');
+
     }
 }

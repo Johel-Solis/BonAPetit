@@ -42,12 +42,7 @@ class SoupController extends Controller
     {
         //
         
-        $createSoupController= new CreateSoupController();
-        $createSoupController->__invoke($request);
-        
-        
-        return redirect()->route("soup.index")
-                ->with('msj','Sopa registro exitoso');
+       
     }
 
     /**
@@ -92,6 +87,11 @@ class SoupController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $deleteSoupController= new deleteSoupController();
+        $deleteSoupController->__invoke($id);
+        return redirect()->route("compPlate.index")
+           ->with('msj','Sopa eliminacion exitosa');
+
+
     }
 }

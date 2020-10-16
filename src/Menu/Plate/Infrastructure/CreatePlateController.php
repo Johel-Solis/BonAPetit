@@ -6,7 +6,7 @@ namespace Src\Menu\Plate\Infrastructure;
 
 use Illuminate\Http\Request;
 use Src\Menu\Plate\Application\CreatePlateUseCase;
-use Src\Menu\PLate\Infrastructure\Repositories\EloquentPLateRepository;
+use Src\Menu\Plate\Infrastructure\Repositories\EloquentPlateRepository;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Storage;
 

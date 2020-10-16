@@ -18,5 +18,10 @@ Route::get('/', function () {
 });
 
 Route::resource('plate','PlateController');
+Route::resource('compPlate','CompPlateController');
 
 Route::get('plate/destroy/{id}', 'PlateController@destroy');
+Route::get('principle/destroy/{id}', 'PrincipleController@destroy');
+Route::get('meat/destroy/{id}', 'MeatController@destroy');
+Route::get('soup/destroy/{id}', 'SoupController@destroy');
+Route::get('beverage/destroy/{id}', 'BeverageController@destroy');
