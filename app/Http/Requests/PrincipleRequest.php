@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class MeatRequest extends FormRequest
+class PrincipleRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,7 +26,7 @@ class MeatRequest extends FormRequest
 
         return [
            
-            'name'=>'required|min:1|max:60|unique:meats,name',
+            'name'=>'required|min:1|max:60|unique:principles,name',
 
         ];
 

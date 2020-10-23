@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Beverage;
 use App\Meat;
+use App\Principle;
+use App\Soup;
 use Illuminate\Http\Request;
 
 use Src\Menu\Beverage\Infrastructure\CreateBeverageController;
@@ -73,9 +76,10 @@ class CompPlateController extends Controller
      */
     public function store(Request $request)
     {
-        $meat= new Meat($request->all());
+        
         
         if ($request->input('tipoComp')=='soup') {
+            $soup= new Soup($request->all());
             $createSoupController= new CreateSoupController();
             $createSoupController->__invoke($request);
             
@@ -86,6 +90,7 @@ class CompPlateController extends Controller
             
         }elseif($request->input('tipoComp')=='meat') 
         {
+            $meat= new Meat($request->all());
             $createMeatController= new CreateMeatController();
             $createMeatController->__invoke($request);
             
@@ -95,7 +100,7 @@ class CompPlateController extends Controller
 
         }elseif($request->input('tipoComp')=='beverage') 
         {
-            
+            $beverage= new Beverage($request->all());
             $createBeverageController= new CreateBeverageController();
             $createBeverageController->__invoke($request);
             
@@ -106,6 +111,7 @@ class CompPlateController extends Controller
 
         }else
         {
+            $principle= new Principle($request->all());
             $createPrincipleController= new CreatePrincipleController();
             $createPrincipleController->__invoke($request);
             
