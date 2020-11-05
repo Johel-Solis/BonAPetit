@@ -8,6 +8,8 @@ namespace Src\Menu\Beverage\Application;
 use Src\Menu\Beverage\Domain\Contracts\BeverageRepositoryContract;
 use Src\Menu\Beverage\Domain\Beverage;
 use Src\Menu\Beverage\Domain\ValueObjects\BeverageName;
+use Src\Menu\Beverage\Domain\ValueObjects\BeveragePhoto;
+
 
 
 final class CreateBeverageUseCase
@@ -19,11 +21,12 @@ final class CreateBeverageUseCase
         $this->repository = $repository;
     }
 
-    public function __invoke( string $beverageName): void
+    public function __invoke( string $beverageName, string $beveragePhoto): void
     {
         $name     = new BeverageName($beverageName);
+        $photo     = new BeveragePhoto($beveragePhoto);
 
-        $beverage = Beverage::create( $name);
+        $beverage = Beverage::create( $name,$photo);
 
         $this->repository->save($beverage);
     }

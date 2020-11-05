@@ -26,8 +26,25 @@ final class EloquentSoupRepository implements SoupRepositoryContract
     {
         $newSoup                = new EloquentSoupModel();
         $newSoup->name          =$soup->name()->value();
+        $newSoup->photo          =$soup->photo()->value();
 
         $newSoup->save();
+    }
+
+    public function update(SoupId $soupId,Soup $soup): void
+    {
+        $soupToUpdate = new EloquentSoupModel();
+        
+
+        $data = [
+            'name'          =>$soup->name()->value(),
+            'photo'         =>$soup->photo()->value(),
+        ];
+
+        $soupToUpdate
+            ->findOrFail($soupId->value())
+            ->update($data);
+
     }
 
 

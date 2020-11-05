@@ -4,12 +4,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Profile - Brand</title>
+    <title>Componentes plato</title>
     <link rel="stylesheet" href="{{ asset('assets_CP/bootstrap/css/bootstrap.min.css?h=8061b9c170bb6df6f0534784658e64d1') }}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Arbutus">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
     <link rel="stylesheet" href="{{ asset('assets_CP/css/styles.min.css?h=c90f948c9838df7700d9c6003c79ea92') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
 </head>
 
 <body id="page-top">
@@ -57,13 +58,36 @@
                                 </div>
                                 <div class="card-body text-center">
 
-                                        <form action="/compPlate" method="POST" class="text-left">
+                                        <form action="/compPlate" method="POST" class="text-left" enctype="multipart/form-data">
 
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
                                         <div class="form-row">
                                             <div class="col">
                                                 <div class="form-group"><label for="name"><strong>Nombre&nbsp;</strong><br></label><input class="form-control" type="text" placeholder="nombre del componente" name="name" required="" minlength="1" maxlength="60"></div>
+                                                <div class="form-group"><label for="photo"><strong>Foto&nbsp;</strong><br></label><input  type="file" style="width: 270px;height: 45px;"  name="photo" id="photo"></div>
                                             </div>
+                                            <div class="col">
+                                                
+                                                <div id="imagPrev">
+                                                </div>
+                                                @if(session('msj'))
+                                                <div class="notification alert alert-success" role="alert"> {{ session('msj')}}</div>
+                                                @endif
+                                            @if(count($errors)>0)
+                    
+
+                                                <ul>
+                                                    @foreach($errors->all() as $error)
+                                                    <div class="notification alert alert-danger" role="alert">
+                                                    
+                                                        <li>{{$error}}</li>
+                                                        </div>
+                                                    @endforeach
+                                                </ul>
+                                                
+                                            @endif
+                                            </div>
+                                            
                                         </div>
                                         <div class="form-row">
                                             <div class="col">
@@ -93,6 +117,24 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
     <script src="{{ asset('assets_CP/js/script.min.js?h=823eb1733a0a81fa385a52d2e8e60900') }}"></script>
+    <script >
+    (function(){
+        function filePreview(input){
+            if(input.files && input.files[0]){
+                var reader = new FileReader();
+                reader.onload = function(e){
+                    $('#imagPrev').html("<img src='"+e.target.result+"' id='imgPre'/>");
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $('#photo').change(function(){
+            filePreview(this);
+
+        });
+
+    })();
+    </script>
 </body>
 
 </html>

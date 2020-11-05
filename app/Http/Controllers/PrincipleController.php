@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Src\Menu\Principle\Infrastructure\DeletePrincipleController;
+use Src\Menu\Principle\Infrastructure\FindPrincipleController;
+use Src\Menu\Principle\Infrastructure\UpdatePrincipleController;
+
 
 
 class PrincipleController extends Controller
@@ -58,9 +61,11 @@ class PrincipleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(int $id)
     {
-        //
+        $findPrincipleController= new FindPrincipleController();
+        $principle=$findPrincipleController->__invoke($id);
+        return view('compPlate/edit')->with(['componet'=>$principle,'tipoComp'=>'principle']);
     }
 
     /**
@@ -70,11 +75,31 @@ class PrincipleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id)
     {
+        $findPrincipleController= new FindPrincipleController();
+        $principle=$findPrincipleController->__invoke($id);
+        if ($principle->name==$request->input('name')) {
+
+            $this->validate($request,['name'=>'required|regex:/^[\pL\s\-]+$/u|min:1|max:60']);
+        }else
+        {
+            $this->validate($request,['name'=>'required|regex:/^[\pL\s\-]+$/u|min:1|max:60|unique:principles,name']);
+
+        }
+        if ($request->file('photo')!= NULL) {
+            
+            $this->validate($request,['photo'=>'required|image|mimes:jpg,jpeg,png']);    
+                
+        }
+        $updatePrincipleController= new UpdatePrincipleController();
+        $updatePrincipleController->__invoke($principle->id, $principle->photo, $request);
+        
+        return redirect()->route("compPlate.index")
+        ->with('msj','Principio modificacion exitosa');
+        
         //
     }
-
     /**
      * Remove the specified resource from storage.
      *

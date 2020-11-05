@@ -22,8 +22,13 @@ final class CreatePrincipleController
     public function __invoke(Request $request)
     {
         $principleName              = $request->input('name');
+        $photo                  = $request->file('photo');
+        $photoName              = time().'_'.$photo->getClientOriginalName();
+        $principlePhoto             = public_path().'/PrincipleFotos';
+        $photo->move($principlePhoto, $photoName);
+        
         $createPrincipleUseCase = new CreatePrincipleUseCase($this->repository);
-        $createPrincipleUseCase->__invoke($principleName);
+        $createPrincipleUseCase->__invoke($principleName, '/PrincipleFotos/'.$photoName);
 
 
     }

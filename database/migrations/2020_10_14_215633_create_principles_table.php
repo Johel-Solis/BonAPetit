@@ -16,6 +16,7 @@ class CreatePrinciplesTable extends Migration
         Schema::create('principles', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('photo');
         });
     }
 

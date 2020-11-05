@@ -15,13 +15,16 @@ final class Soup
 {
     private $id;
     private $name;
+    Private $photo;
     
 
     public function __construct(
-        SoupName $name
+        SoupName $name,
+        SoupPhoto $photo
     )
     {
         $this->name              = $name;
+        $this->photo             =$photo;
     
         
     }
@@ -35,6 +38,10 @@ final class Soup
     {
         return $this->name;
     }
+    public function photo(): SoupPhoto
+    {
+        return $this->photo;
+    }
 
 
     public function setId(SoupId $id) : void
@@ -44,10 +51,11 @@ final class Soup
     
 
     public static function create(
-        SoupName $name
+        SoupName $name,
+        SoupPhoto $photo
     ): self
     {
-        $soup = new self( $name);
+        $soup = new self( $name, $photo);
 
         return $soup;
     }

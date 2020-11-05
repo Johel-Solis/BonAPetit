@@ -9,7 +9,7 @@ class Beverage extends Model
     protected $table = 'beverages';
     
     protected $fillable = [
-        'name'
+        'name','photo',
     ];
     
     protected $guarded = ['id'];

@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Src\Menu\Beverage\Infrastructure\DeleteBeverageController;
-
+use Src\Menu\Beverage\Infrastructure\FindBeverageController;
+use Src\Menu\Beverage\Infrastructure\UpdateBeverageController;
 
 
 class BeverageController extends Controller
@@ -51,16 +52,18 @@ class BeverageController extends Controller
     {
         //
     }
-
+    
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(int $id)
     {
-        //
+        $findBeverageController= new FindBeverageController();
+        $beverage=$findBeverageController->__invoke($id);
+        return view('compPlate/edit')->with(['componet'=>$beverage,'tipoComp'=>'beverage']);
     }
 
     /**
@@ -70,8 +73,29 @@ class BeverageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id)
     {
+        $findBeverageController= new FindBeverageController();
+        $beverage=$findBeverageController->__invoke($id);
+        if ($beverage->name==$request->input('name')) {
+
+            $this->validate($request,['name'=>'required|regex:/^[\pL\s\-]+$/u|min:1|max:60']);
+        }else
+        {
+            $this->validate($request,['name'=>'required|regex:/^[\pL\s\-]+$/u|min:1|max:60|unique:beverages,name']);
+
+        }
+        if ($request->file('photo')!= NULL) {
+            
+            $this->validate($request,['photo'=>'required|image|mimes:jpg,jpeg,png']);    
+                
+        }
+        $updateBeverageController= new UpdateBeverageController();
+        $updateBeverageController->__invoke($beverage->id, $beverage->photo, $request);
+        
+        return redirect()->route("compPlate.index")
+        ->with('msj','bebida modificacion exitosa');
+        
         //
     }
 

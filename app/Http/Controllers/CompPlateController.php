@@ -8,6 +8,7 @@ use App\Principle;
 use App\Soup;
 use Illuminate\Http\Request;
 
+
 use Src\Menu\Beverage\Infrastructure\CreateBeverageController;
 use Src\Menu\Beverage\Infrastructure\DeleteBeverageController;
 use Src\Menu\Beverage\Infrastructure\ListBeverageController;
@@ -19,10 +20,12 @@ use Src\Menu\Meat\Infrastructure\DeleteMeatController;
 use Src\Menu\Meat\Infrastructure\ListMeatController;
 use Src\Menu\Meat\Infrastructure\FindMeatController;
 
+
 use Src\Menu\Principle\Infrastructure\CreatePrincipleController;
 use Src\Menu\Principle\Infrastructure\DeletePrincipleController;
 use Src\Menu\Principle\Infrastructure\ListPrincipleController;
 use Src\Menu\Principle\Infrastructure\FindPrincipleController;
+
 
 use Src\Menu\Soup\Infrastructure\CreateSoupController;
 use Src\Menu\Soup\Infrastructure\DeleteSoupController;
@@ -74,12 +77,25 @@ class CompPlateController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+   
     public function store(Request $request)
     {
         
         
+        $this->validate($request,['name'=>'required|regex:/^[\pL\s\-]+$/u|min:1|max:60', 'photo'=>'required|image|mimes:jpg,jpeg,png'],[
+            'name.required'=>'El campo Nombre es obligatorio',
+            'name.regex'=>'El campo Nombre solo debe tener letras',
+            'name.min'=>'El campo Nombre deber tener al menos un caracter',
+            'name.max'=>'El campo Nombre no deber tener más de 60 caracteres',
+            'photo.required'=> 'Debe cargar una foto',
+            'photo.image'=>'El archivo debe ser una imagen',
+            'photo.mimes'=>'El archivo debe tener extension jpg,jpeg o png',
+        ]);    
         if ($request->input('tipoComp')=='soup') {
-            $soup= new Soup($request->all());
+            
+            $this->validate($request,['name'=>'unique:soups,name'],
+            ['name.unique'=>'El nombre digitado ya existe']);
+
             $createSoupController= new CreateSoupController();
             $createSoupController->__invoke($request);
             
@@ -90,7 +106,8 @@ class CompPlateController extends Controller
             
         }elseif($request->input('tipoComp')=='meat') 
         {
-            $meat= new Meat($request->all());
+            $this->validate($request,['name'=>'unique:meats,name'],
+            ['name.unique'=>'El nombre digitado ya existe']);
             $createMeatController= new CreateMeatController();
             $createMeatController->__invoke($request);
             
@@ -100,7 +117,8 @@ class CompPlateController extends Controller
 
         }elseif($request->input('tipoComp')=='beverage') 
         {
-            $beverage= new Beverage($request->all());
+            $this->validate($request,['name'=>'unique:beverages,name'],
+            ['name.unique'=>'El nombre digitado ya existe']);
             $createBeverageController= new CreateBeverageController();
             $createBeverageController->__invoke($request);
             
@@ -111,7 +129,8 @@ class CompPlateController extends Controller
 
         }else
         {
-            $principle= new Principle($request->all());
+            $this->validate($request,['name'=>'unique:principles,name'],
+            ['name.unique'=>'El nombre digitado ya existe']);
             $createPrincipleController= new CreatePrincipleController();
             $createPrincipleController->__invoke($request);
             

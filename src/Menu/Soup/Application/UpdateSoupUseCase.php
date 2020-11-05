@@ -8,11 +8,11 @@ namespace Src\Menu\Soup\Application;
 use Src\Menu\Soup\Domain\Contracts\SoupRepositoryContract;
 use Src\Menu\Soup\Domain\Soup;
 use Src\Menu\Soup\Domain\ValueObjects\SoupName;
+use Src\Menu\Soup\Domain\ValueObjects\SoupId;
 use Src\Menu\Soup\Domain\ValueObjects\SoupPhoto;
 
 
-
-final class CreateSoupUseCase
+final class UpdateSoupUseCase
 {
     private $repository;
 
@@ -21,12 +21,15 @@ final class CreateSoupUseCase
         $this->repository = $repository;
     }
 
-    public function __invoke( string $soupName, string $soupPhoto): void
+    public function __invoke(int $soupId, string $soupName, string $soupPhoto): void
     {
-        $name  = new SoupName($soupName);
-        $photo = new SoupPhoto($soupPhoto);
-        $soup  = Soup::create( $name, $photo);
+        $id                =new SoupId($soupId);
+        $name              = new SoupName($soupName);
+        $photo             = new SoupPhoto($soupPhoto);
 
-        $this->repository->save($soup);
+
+        $soup = Soup::create( $name,$photo);
+
+        $this->repository->update($id, $soup);
     }
 }

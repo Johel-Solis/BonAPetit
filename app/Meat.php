@@ -9,7 +9,7 @@ class Meat extends Model
     protected $table = 'meats';
     
     protected $fillable = [
-        'name'
+        'name','photo',
     ];
     
     protected $guarded = ['id'];

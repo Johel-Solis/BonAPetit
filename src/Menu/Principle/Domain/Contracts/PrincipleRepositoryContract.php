@@ -10,6 +10,7 @@ interface PrincipleRepositoryContract
 {
 	
     public function save(Principle $principle): void;
+    public function update(PrincipleId $principleId,Principle $principle): void;
     public function list(); 
     public function find(PrincipleId $principleId); 
     public function delete(PrincipleId $principleId);

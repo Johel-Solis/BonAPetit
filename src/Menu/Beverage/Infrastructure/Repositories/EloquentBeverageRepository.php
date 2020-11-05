@@ -27,8 +27,24 @@ final class EloquentBeverageRepository implements BeverageRepositoryContract
         
         $newBeverage                = new EloquentBeverageModel();
         $newBeverage->name          =$beverage->name()->value();
+        $newBeverage->photo         =$beverage->photo()->value();
 
         $newBeverage->save();
+    }
+    public function update(BeverageId $beverageId,Beverage $beverage): void
+    {
+        $beverageToUpdate = new EloquentBeverageModel();
+        
+
+        $data = [
+            'name'          =>$beverage->name()->value(),
+            'photo'         =>$beverage->photo()->value(),
+        ];
+
+        $beverageToUpdate
+            ->findOrFail($beverageId->value())
+            ->update($data);
+
     }
 
 

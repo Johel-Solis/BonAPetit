@@ -10,6 +10,7 @@ interface BeverageRepositoryContract
 {
 	
     public function save(Beverage $beverage): void;
+    public function update(BeverageId $beverageId,Beverage $beverage): void;
     public function list(); 
     public function find(BeverageId $beverageId); 
     public function delete(BeverageId $beverageId);

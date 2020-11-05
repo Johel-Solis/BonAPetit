@@ -27,7 +27,23 @@ final class EloquentPrincipleRepository implements PrincipleRepositoryContract
         
         $newPrinciple                = new EloquentPrincipleModel();
         $newPrinciple->name          =$principle->name()->value();
+        $newPrinciple->photo          =$principle->photo()->value();
         $newPrinciple->save();
+    }
+    public function update(PrincipleId $principleId,Principle $principle): void
+    {
+        $principleToUpdate = new EloquentPrincipleModel();
+        
+
+        $data = [
+            'name'          =>$principle->name()->value(),
+            'photo'         =>$principle->photo()->value(),
+        ];
+
+        $principleToUpdate
+            ->findOrFail($principleId->value())
+            ->update($data);
+
     }
 
 

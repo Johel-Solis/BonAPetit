@@ -93,25 +93,32 @@ class PlateController extends Controller
     {
         $findPlateController= new FindPlateController();
         $plate=$findPlateController->__invoke($id);
-        if ($plate->name==$request->input('name')) {
-
-            $this->validate($request,['name'=>'required|regex:/^[\pL\s\-]+$/u|min:1|max:20']);
-        }else
-        {
-            $this->validate($request,['name'=>'required|regex:/^[\pL\s\-]+$/u|min:1|max:20|unique:plates,name']);
+        $this->validate($request,[ 
+            'name'=>'required|regex:/^[\pL\s\-]+$/u|min:1|max:20',
+            'description'=>'required|min:10|string',
+            'precio'=>'required|integer|min:0',
+        ],[
+            'name.required'=>'El campo Nombre es obligatorio',
+            'name.regex'=>'El campo Nombre solo debe tener letras',
+            'name.min'=>'El campo Nombre deber tener al menos un caracter',
+            'name.max'=>'El campo Nombre no deber tener más de 20 caracteres',
+            'description.required'=>'El campo Descripción es obligatorio',
+            'description.min'=>'El campo descripcion debe tener al menos 10 caracteres',
+            'precio.required'=>'El campo precio es obligatorio',
+            'precio.integer'=>'El campo precio solo debe contener numeros',
+            'precio.min'=>'El precio no puede ser menor a $0',
+        ]  );
+        if ($plate->name!=$request->input('name')) {
+            $this->validate($request,['name'=>'unique:plates,name'],
+            ['name.unique'=>'El nombre digitado ya existe']);
 
         }
         if ($request->file('photo')!= NULL) {
             
-            $this->validate($request,['description'=>'required|min:10|string',
-            'precio'=>'required|integer|min:0','photo'=>'required|image|mimes:jpg,jpeg,png']);    
-                
-        }else
-        {
-            $this->validate($request,['description'=>'required|min:10|string',
-            'precio'=>'required|integer|min:0',]);
-
-            
+        $this->validate($request,['photo'=>'required|image|mimes:jpg,jpeg,png'],
+        ['photo.required'=> 'Debe cargar una foto',
+        'photo.image'=>'El archivo debe ser una imagen',
+        'photo.mimes'=>'El archivo debe tener extension jpg,jpeg o png']);            
         }
         $updatePlateController= new UpdatePlateController();
         $updatePlateController->__invoke($plate->id, $plate->photo, $request);

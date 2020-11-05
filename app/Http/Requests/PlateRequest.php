@@ -44,7 +44,7 @@ class PlateRequest extends FormRequest
             'name.max'=>'El campo Nombre no deber tener más de 20 caracteres',
             'name.unique'=>'El nombre digitado ya existe',
             'photo.required'=> 'Debe cargar una foto',
-            'photo.imae'=>'El archivo debe ser una imagen',
+            'photo.image'=>'El archivo debe ser una imagen',
             'photo.mimes'=>'El archivo debe tener extension jpg,jpeg o png',
             'description.required'=>'El campo Descripción es obligatorio',
             'description.min'=>'El campo descripcion debe tener al menos 10 caracteres',

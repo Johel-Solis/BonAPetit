@@ -8,6 +8,7 @@ use Src\Menu\Soup\Infrastructure\CreateSoupController;
 use Src\Menu\Soup\Infrastructure\DeleteSoupController;
 use Src\Menu\Soup\Infrastructure\ListSoupController;
 use Src\Menu\Soup\Infrastructure\FindSoupController;
+use Src\Menu\Soup\Infrastructure\UpdateSoupController;
 
 
 class SoupController extends Controller
@@ -62,9 +63,11 @@ class SoupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(int $id)
     {
-        //
+        $findSoupController= new FindSoupController();
+        $soup=$findSoupController->__invoke($id);
+        return view('compPlate/edit')->with(['componet'=>$soup,'tipoComp'=>'soup']);
     }
 
     /**
@@ -74,8 +77,29 @@ class SoupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id)
     {
+        $findSoupController= new FindSoupController();
+        $soup=$findSoupController->__invoke($id);
+        if ($soup->name==$request->input('name')) {
+
+            $this->validate($request,['name'=>'required|regex:/^[\pL\s\-]+$/u|min:1|max:60']);
+        }else
+        {
+            $this->validate($request,['name'=>'required|regex:/^[\pL\s\-]+$/u|min:1|max:60|unique:soups,name']);
+
+        }
+        if ($request->file('photo')!= NULL) {
+            
+            $this->validate($request,['photo'=>'required|image|mimes:jpg,jpeg,png']);    
+                
+        }
+        $updateSoupController= new UpdateSoupController();
+        $updateSoupController->__invoke($soup->id, $soup->photo, $request);
+        
+        return redirect()->route("compPlate.index")
+        ->with('msj','Sopa modificacion exitosa');
+        
         //
     }
 

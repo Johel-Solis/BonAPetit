@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Src\Menu\Meat\Infrastructure\DeleteMeatController;
 use Src\Menu\Meat\Infrastructure\ListMeatController;
 use Src\Menu\Meat\Infrastructure\FindMeatController;
+use Src\Menu\Meat\Infrastructure\UpdateMeatController;
 
 class MeatController extends Controller
 {
@@ -59,9 +60,11 @@ class MeatController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(int $id)
     {
-        //
+        $findMeatController= new FindMeatController();
+        $meat=$findMeatController->__invoke($id);
+        return view('compPlate/edit')->with(['componet'=>$meat,'tipoComp'=>'meat']);
     }
 
     /**
@@ -71,8 +74,29 @@ class MeatController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id)
     {
+        $findMeatController= new FindMeatController();
+        $meat=$findMeatController->__invoke($id);
+        if ($meat->name==$request->input('name')) {
+
+            $this->validate($request,['name'=>'required|regex:/^[\pL\s\-]+$/u|min:1|max:60']);
+        }else
+        {
+            $this->validate($request,['name'=>'required|regex:/^[\pL\s\-]+$/u|min:1|max:60|unique:meats,name']);
+
+        }
+        if ($request->file('photo')!= NULL) {
+            
+            $this->validate($request,['photo'=>'required|image|mimes:jpg,jpeg,png']);    
+                
+        }
+        $updateMeatController= new UpdateMeatController();
+        $updateMeatController->__invoke($meat->id, $meat->photo, $request);
+        
+        return redirect()->route("compPlate.index")
+        ->with('msj','carne modificacion exitosa');
+        
         //
     }
 

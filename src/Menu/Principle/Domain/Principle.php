@@ -6,20 +6,25 @@ namespace Src\Menu\Principle\Domain;
 
 use Src\Menu\Principle\Domain\ValueObjects\PrincipleName;
 use Src\Menu\Principle\Domain\ValueObjects\PrincipleId;
+use Src\Menu\Principle\Domain\ValueObjects\PrinciplePhoto;
+
 
 
 final class Principle
 {
     private $id;
     private $name;
+    private $photo;
    
     
 
     public function __construct(
-        PrincipleName $name
+        PrincipleName $name,
+        PrinciplePhoto $photo
     )
     {
-        $this->name              = $name;
+        $this->name      = $name;
+        $this->photo     =$photo;      
     
     }
 
@@ -33,7 +38,10 @@ final class Principle
         return $this->name;
     }
 
-
+    public function photo(): PrinciplePhoto
+    {
+        return $this->photo;
+    }
 
     public function setId(PrincipleId $id) : void
     {
@@ -42,10 +50,11 @@ final class Principle
     
 
     public static function create(
-        PrincipleName $name
+        PrincipleName $name,
+        PrinciplePhoto $photo
     ): self
     {
-        $principle = new self($name);
+        $principle = new self($name,$photo);
 
         return $principle;
     }

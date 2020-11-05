@@ -9,7 +9,7 @@ class Soup extends Model
     protected $table = 'soups';
     
     protected $fillable = [
-        'name'
+        'name','photo',
     ];
     
     protected $guarded = ['id'];

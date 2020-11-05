@@ -20,6 +20,21 @@ final class EloquentMeatRepository implements MeatRepositoryContract
     {
         $this->eloquentMeatModel= new EloquentMeatModel();
     }
+    public function update(MeatId $meatId,Meat $meat): void
+    {
+        $meatToUpdate = new EloquentMeatModel();
+        
+
+        $data = [
+            'name'          =>$meat->name()->value(),
+            'photo'         =>$meat->photo()->value(),
+        ];
+
+        $meatToUpdate
+            ->findOrFail($meatId->value())
+            ->update($data);
+
+    }
 
 
     public function save(Meat $meat): void
@@ -27,6 +42,7 @@ final class EloquentMeatRepository implements MeatRepositoryContract
         
         $newMeat                = new EloquentMeatModel();
         $newMeat->name          =$meat->name()->value();
+        $newMeat->photo          =$meat->photo()->value();
 
         $newMeat->save();
     }

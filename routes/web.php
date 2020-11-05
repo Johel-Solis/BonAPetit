@@ -20,6 +20,11 @@ Route::get('/', function () {
 Route::resource('plate','PlateController');
 Route::resource('compPlate','CompPlateController');
 
+Route::resource('soup','SoupController');
+Route::resource('meat','MeatController');
+Route::resource('principle','PrincipleController');
+Route::resource('beverage','BeverageController');
+
 Route::get('plate/destroy/{id}', 'PlateController@destroy');
 Route::get('principle/destroy/{id}', 'PrincipleController@destroy');
 Route::get('meat/destroy/{id}', 'MeatController@destroy');

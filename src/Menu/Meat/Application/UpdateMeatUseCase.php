@@ -8,12 +8,12 @@ namespace Src\Menu\Meat\Application;
 use Src\Menu\Meat\Domain\Contracts\MeatRepositoryContract;
 use Src\Menu\Meat\Domain\Meat;
 use Src\Menu\Meat\Domain\ValueObjects\MeatName;
-use Src\Menu\Meat\Domain\ValueObjects\MeatDescription;
+
+use Src\Menu\Meat\Domain\ValueObjects\MeatId;
 use Src\Menu\Meat\Domain\ValueObjects\MeatPhoto;
-use Src\Menu\Meat\Domain\ValueObjects\MeatPrecio;
 
 
-final class CreateMeatUseCase
+final class UpdateMeatUseCase
 {
     private $repository;
 
@@ -22,15 +22,16 @@ final class CreateMeatUseCase
         $this->repository = $repository;
     }
 
-    public function __invoke( string $meatName, string $meatPhoto): void
+    public function __invoke(int $meatId, string $meatName, string $meatPhoto): void
     {
+        $id                =new MeatId($meatId);
         $name              = new MeatName($meatName);
-        $photo              = new MeatPhoto($meatPhoto);
-        
-        
+       
+        $photo             = new MeatPhoto($meatPhoto);
+
 
         $meat = Meat::create( $name,$photo);
 
-        $this->repository->save($meat);
+        $this->repository->update($id, $meat);
     }
 }

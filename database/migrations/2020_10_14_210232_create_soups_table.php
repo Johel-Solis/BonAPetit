@@ -16,7 +16,7 @@ class CreateSoupsTable extends Migration
         Schema::create('soups', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            
+            $table->string('photo');
         });
     }
 

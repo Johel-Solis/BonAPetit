@@ -7,9 +7,11 @@
     <title>Componentes plato</title>
     <link rel="stylesheet" href="{{ asset('assets_CP/bootstrap/css/bootstrap.min.css?h=8061b9c170bb6df6f0534784658e64d1') }}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Arbutus">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
     <link rel="stylesheet" href="{{ asset('assets_CP/css/styles.min.css?h=c90f948c9838df7700d9c6003c79ea92') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body id="page-top">
@@ -73,7 +75,10 @@
                                                     @foreach($soups ?? '' as $soup)
                                                         <tr>
                                                             <td>{{ $soup->name }}</td>
-                                                            <td><a href="{{ action('SoupController@destroy',$soup->id) }}" onclick="return confirm('¿Esta seguro?')"><em class="fa fa-trash"></em></a></td>
+                                                            
+                                                            <td>
+                                                                <a href="{{action('SoupController@edit', $soup->id)}}" ><em class="fa fa-pencil"></em></a>
+                                                            <a href="{{ action('SoupController@destroy',$soup->id) }}" onclick="return confirm('¿Esta seguro?')"><em class="fa fa-trash"></em></a></td>
                                                             
                                                         </tr>
                                                     @endforeach
@@ -101,7 +106,9 @@
                                                     @foreach($principles ?? '' as $principle)
                                                         <tr>
                                                             <td>{{ $principle->name }}</td>
-                                                            <td><a href="{{ action('PrincipleController@destroy',$principle->id) }}" onclick="return confirm('¿Esta seguro?')"><em class="fa fa-trash"></em></a></td>
+                                                            <td>
+                                                            <a href="{{action('PrincipleController@edit', $principle->id)}}" ><em class="fa fa-pencil"></em></a>
+                                                            <a href="{{ action('PrincipleController@destroy',$principle->id) }}" onclick="return confirm('¿Esta seguro?')"><em class="fa fa-trash"></em></a></td>
                                                             
                                                         </tr>
                                                     @endforeach
@@ -130,7 +137,9 @@
                                                     @foreach($meats ?? '' as $meat)
                                                         <tr>
                                                             <td>{{ $meat->name }}</td>
-                                                            <td><a href="{{ action('MeatController@destroy',$meat->id) }}" onclick="return confirm('¿Esta seguro?')"><em class="fa fa-trash"></em></a></td>
+                                                            <td>
+                                                            <a href="{{action('MeatController@edit', $meat->id)}}" ><em class="fa fa-pencil"></em></a>
+                                                            <a href="{{ action('MeatController@destroy',$meat->id) }}" onclick="return confirm('¿Esta seguro?')"><em class="fa fa-trash"></em></a></td>
                                                             
                                                         </tr>
                                                     @endforeach
@@ -158,7 +167,9 @@
                                                     @foreach($beverages as $beverage)
                                                         <tr>
                                                             <td>{{ $beverage->name }}</td>
-                                                            <td><a href="{{ action('BeverageController@destroy',$beverage->id) }}" onclick="return confirm('¿Esta seguro?')"><em class="fa fa-trash"></em></a></td>
+                                                            <td>
+                                                            <a href="{{action('BeverageController@edit', $beverage->id)}}" ><em class="fa fa-pencil"></em></a>
+                                                            <a href="{{ action('BeverageController@destroy',$beverage->id) }}" onclick="return confirm('¿Esta seguro?')"><em class="fa fa-trash"></em></a></td>
                                                             
                                                         </tr>
                                                     @endforeach

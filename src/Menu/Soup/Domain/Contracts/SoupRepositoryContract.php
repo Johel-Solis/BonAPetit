@@ -10,6 +10,7 @@ interface SoupRepositoryContract
 {
 	
     public function save(Soup $soup): void;
+    public function update(SoupId $soupId,Soup $soup): void;
     public function list(); 
     public function find(SoupId $soupId); 
     public function delete(SoupId $soupId);

@@ -9,7 +9,7 @@ class Principle extends Model
     protected $table = 'principles';
     
     protected $fillable = [
-        'name'
+        'name','photo',
     ];
     
     protected $guarded = ['id'];
