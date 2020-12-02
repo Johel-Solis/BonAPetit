@@ -34,7 +34,7 @@ final class EloquentSoupRepository implements SoupRepositoryContract
     public function update(SoupId $soupId,Soup $soup): void
     {
         $soupToUpdate = new EloquentSoupModel();
-        
+
 
         $data = [
             'name'          =>$soup->name()->value(),
@@ -48,7 +48,7 @@ final class EloquentSoupRepository implements SoupRepositoryContract
     }
 
 
-    
+
     public function list(){
         return $this->eloquentSoupModel::paginate(15);
     }
@@ -56,16 +56,16 @@ final class EloquentSoupRepository implements SoupRepositoryContract
     {
         $soup= $this->eloquentSoupModel->findOrFail($soupId->value());
          return $soup;
-         
+
      }
- 
+
     public function delete(SoupId $soupId){
-        
+
        $soup= $this->eloquentSoupModel->findOrFail($soupId->value());
         $soup->delete();
     }
 
 
-   
-   
+
+
 }
