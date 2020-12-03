@@ -26,6 +26,8 @@
                     <li class="nav-item"><a class="nav-link active" href="#">Domicilios</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{action('PlateController@create')}}">Registrar Plato Especial</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{action('CompPlateController@index')}}">Componente Plato Ejecutivo</a></li>
+                    <li class="nav-item"><a class="nav-link fa fa-shopping-cart" href="{{action('CarroController@checkout')}}">Carrito @include('cart.estado')</a></li>
+
                 </ul>
                 <form class="form-inline mr-auto" target="_self">
                     <div class="form-group"><label for="search-field"><i class="fa fa-search"></i></label><input class="form-control search-field" type="search" id="search-field" name="search"></div>
@@ -37,7 +39,7 @@
         <div class="row">
         
         
-            <div class="col-md-12">
+            <div class="col-md-7">
                 <h2 style="text-align: center; font-weight: bold; margin-top: 30px;">LISTA DE PLATOS ESPECIALES</h2>
                 @if(session('msj'))
                 <div class="notification alert alert-success" role="alert"> {{ session('msj')}}</div>
@@ -57,19 +59,29 @@
                             <th>Foto</th>
 
                             <th><em class="fa fa-cog"></em> Acción</th>
+                            
+
                           
                         </thead>
                         <tbody>
-                                @foreach($plates as $plate)
+                            @foreach($plates as $plate)
+
                             <tr>
                             
                                 <td>{{ $plate->name }}</td>
                                 <td>{{ $plate->description }}</td>
                                 <td>${{$plate->precio}}</td>
+
                                 <td><img style="border: ridge; width: 250px; height: auto;" src="{{asset($plate->photo)}}"></td>
                                 <td>
                                    <a href="{{action('PlateController@edit', $plate->id)}}" class="btn btn-default"><em class="fa fa-pencil"></em></a>
                                     <a href="{{ url('plate/destroy',$plate->id) }}" onclick="return confirm('¿Esta seguro?')"class="btn btn-danger"><em class="fa fa-trash"></em></a>
+                                    <form action="{{route('carro.agregar')}}" method="post">
+                                        @csrf
+                                        <input type="hidden" name="id" value="{{$plate->name}}">
+                                        <input type="number" value="1" name="quantity">
+                                        <input type="submit" value="Add to cart" class="btn btn-info rounded-pill fa fa-shopping-cart">
+                                    </form>
                                 </td>
                                
                             </tr>
@@ -101,9 +113,13 @@
                           </ul>
                     </nav>
                 </div>
+
             </div>
+             @include('cart.resumen')
+
         </div>
     </div>
+   
     
     <div class="footer-clean"  style="position: relative; width: 100%; bottom: 0px;">
         <footer>

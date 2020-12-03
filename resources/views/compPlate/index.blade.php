@@ -24,6 +24,7 @@
                     <li class="nav-item"><a class="nav-link active" href="#">Domicilios</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Oferta del dia</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Plato ejecutivo</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{action('CarroController@checkout')}}">Carrito @include('cart.estado')</a></li>
                     <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">Plato Especial </a>
                         <div class="dropdown-menu"><a class="dropdown-item" href="{{action('PlateController@create')}}">Registrar</a><a class="dropdown-item" href="{{action('PlateController@index')}}">Lista</a></div>
                     </li>

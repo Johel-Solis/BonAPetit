@@ -30,3 +30,7 @@ Route::get('principle/destroy/{id}', 'PrincipleController@destroy');
 Route::get('meat/destroy/{id}', 'MeatController@destroy');
 Route::get('soup/destroy/{id}', 'SoupController@destroy');
 Route::get('beverage/destroy/{id}', 'BeverageController@destroy');
+Route::post('/carro/agregar','CarroController@agregar')->name('carro.agregar');
+Route::get('/carro/checkout','CarroController@checkout')->name('carro.checkout');
+Route::post('/carro/checkout','CarroController@delete')->name('carro.remover');
+Route::post('/carro/vaciar','CarroController@destroy')->name('carro.vaciar');
