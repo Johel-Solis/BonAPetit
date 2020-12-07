@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Src\Menu\Weekly\Infrastructure\Repositories;
 
-use App\Soup_day as EloquentDaySoupModel;
+use App\Day_soup as EloquentDaySoupModel;
 use Src\Menu\Weekly\Domain\Contracts\DaySoupRepositoryContract;
 use Src\Menu\Soup\Domain\Soup;
 use Src\Menu\weekly\Domain\DaySoup;

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Src\Menu\Weekly\Infrastructure\Repositories;
 
-use App\Meat_day as EloquentDayMeatModel;
+use App\Day_meat as EloquentDayMeatModel;
 use Src\Menu\Weekly\Domain\Contracts\DayMeatRepositoryContract;
 use Src\Menu\Meat\Domain\Meat;
 use Src\Menu\weekly\Domain\DayMeat;

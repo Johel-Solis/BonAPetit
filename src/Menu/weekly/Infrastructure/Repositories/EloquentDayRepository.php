@@ -59,18 +59,50 @@ final class EloquentDayRepository implements DayRepositoryContract
         
     }
 
-    public function find(DayId $dayId)
+    public function find(int $dayId)
     {
-        /*
-        $soup= $this->eloquentSoupModel->findOrFail($soupId->value());
-         return $soup;*/
+        $newDayP  = new EloquentDayModel();
+
+        $day= $newDayP->findOrFail($dayId);
+         return $day;
+
+     }
+     public function meats(int $dayId)
+    {
+        
+        $day= $this->eloquentDayModel->findOrFail($dayId);
+         return $day->meats();
+
+     }
+     public function principles(int $dayId)
+    {
+        
+        $day= $this->eloquentDayModel->findOrFail($dayId);
+        return $day->principles();
+
+     }
+     public function beverages(int $dayId)
+    {
+        
+        $day= $this->eloquentDayModel->findOrFail($dayId);
+        return $day->beverages();
+
+     }
+     public function soups(int $dayId)
+    {
+        
+        $day= $this->eloquentDayModel->findOrFail($dayId);
+        return $day->soups();
 
      }
 
      public function delete(DayId $dayId){
+        $newDayP                = new EloquentDayModel();
 
+      $day= $newDayP->findOrFail($dayId->value());
+     
+      
 
-      $day= $this->EloquentDayModel->findOrFail($dayId->value());
       $day->delete();
 
     }

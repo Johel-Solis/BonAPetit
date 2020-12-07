@@ -14,4 +14,10 @@ class Principle extends Model
     
     protected $guarded = ['id'];
     public $timestamps = false;
+
+    public function days()
+    {
+        return $this->belongsToMany(Day::class);
+
+    }
 }

@@ -11,7 +11,7 @@ interface DayRepositoryContract
 
     public function save(Day $day):Day;
     public function list();
-    public function find(DayId $dayId);
+    public function find(int $dayId);
     public function delete(DayId $dayId);
 
 

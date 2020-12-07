@@ -21,9 +21,10 @@
             <div class="collapse navbar-collapse"
                 id="navcol-1">
                 <ul class="nav navbar-nav">
-                    <li class="nav-item"><a class="nav-link active" href="#">Domicilios</a></li>
+                    
                     <li class="nav-item"><a class="nav-link" href="{{action('PlateController@index')}}">Lista Plato Especial</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{action('CompPlateController@index')}}">Componente Plato Ejecutivo</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{action('DayController@index')}}">Semanario</a></li>
                 </ul>
                 <form class="form-inline mr-auto" target="_self">
                     <div class="form-group"><label for="search-field"><i class="fa fa-search"></i></label><input class="form-control search-field" type="search" id="search-field" name="search"></div>

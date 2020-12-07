@@ -11,28 +11,27 @@ class Day extends Model
     protected $fillable = [
         'day_week',
     ];
-    
     protected $guarded = ['id'];
     public $timestamps = false;
 
-    public function beverage_days()
+    public function beverages()
     {
-        return $this->belongToMany(Beverage_day::class);
+        return $this->belongsToMany(Beverage::class);
 
     }
-    public function soup_days()
+    public function soups()
     {
-        return $this->belongToMany(Soup_day::class);
+        return $this->belongsToMany(Soup::class);
 
     }
-    public function meat_days()
+    public function meats()
     {
-        return $this->belongToMany(Meat_day::class);
+        return $this->belongsToMany(Meat::class);
 
     }
-    public function Principle_day()
+    public function principles()
     {
-        return $this->belongToMany(Principle_day::class);
+        return $this->belongsToMany(Principle::class);
 
     }
 }

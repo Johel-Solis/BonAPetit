@@ -24,8 +24,10 @@ Route::resource('soup','SoupController');
 Route::resource('meat','MeatController');
 Route::resource('principle','PrincipleController');
 Route::resource('beverage','BeverageController');
-Route::resource('day','dayController');
+Route::resource('day','DayController');
+Route::resource('cart','CartController');
 
+Route::get('day/destroy/{id}', 'DayController@destroy');
 Route::get('plate/destroy/{id}', 'PlateController@destroy');
 Route::get('principle/destroy/{id}', 'PrincipleController@destroy');
 Route::get('meat/destroy/{id}', 'MeatController@destroy');

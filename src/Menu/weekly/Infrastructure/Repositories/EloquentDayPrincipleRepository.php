@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Src\Menu\Weekly\Infrastructure\Repositories;
 
-use App\Principle_day as EloquentDayPrincipleModel;
+use App\Day_principle as EloquentDayPrincipleModel;
 use Src\Menu\Weekly\Domain\Contracts\DayPrincipleRepositoryContract;
 use Src\Menu\Principle\Domain\Principle;
 use Src\Menu\weekly\Domain\DayPrinciple;

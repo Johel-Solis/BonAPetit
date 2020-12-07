@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Src\Menu\Weekly\Infrastructure\Repositories;
 
-use App\Beverage_day as EloquentDayBeverageModel;
+use App\beverage_day as EloquentDayBeverageModel;
 use Src\Menu\Weekly\Domain\Contracts\DayBeverageRepositoryContract;
 use Src\Menu\Beverage\Domain\Beverage;
 use Src\Menu\weekly\Domain\DayBeverage;

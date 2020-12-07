@@ -73,7 +73,7 @@
 												<a class="dropdown-item "  style="width: 100%;" href="{{action('PlateController@index')}}">Lista</a></div>
 										</li>
 										<li class="smooth-menu"><a href="{{ action('CompPlateController@index') }}">Componente Plato Ejecutivo</a></li>
-										<li class="smooth-menu"><a href="#spo">Semanario Plato Especial</a></li>
+										<li class="smooth-menu"><a href="{{ action('DayController@index') }}">Semanario Plato Especial</a></li>
 
 										<!--/.project-btn-->
 									</ul>

@@ -23,12 +23,11 @@
             <div class="collapse navbar-collapse"
                 id="navcol-1">
                 <ul class="nav navbar-nav">
-                    <li class="nav-item"><a class="nav-link active" href="#">Domicilios</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{action('PlateController@create')}}">Registrar semanario</a></li>
+                    
+                    <li class="nav-item"><a class="nav-link" href="{{action('DayController@create')}}">Registrar semanario</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{action('CompPlateController@index')}}">Componente Plato Ejecutivo</a></li>
-                    <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">Plato especial </a>
-                        <div class="dropdown-menu"><a class="dropdown-item" href="{{action('PlateController@create')}}">Registrar</a><a class="dropdown-item" href="{{action('PlateController@index')}}">Lista</a></div>
-                    </li>
+                    <li class="nav-item"><a class="nav-link" href="{{action('PlateController@index')}}">Plato Especial</a></li>
+                    
                 </ul>
                 <form class="form-inline mr-auto" target="_self">
                     <div class="form-group"><label for="search-field"><i class="fa fa-search"></i></label><input class="form-control search-field" type="search" id="search-field" name="search"></div>
@@ -41,7 +40,7 @@
         
         
             <div class="col-md-12">
-                <h2 style="text-align: center; font-weight: bold; margin-top: 30px;">LISTA DE Menú Del DIAS </h2>
+                <h2 style="text-align: center; font-weight: bold; margin-top: 30px;">LISTA DE MENÚ DEL DIA </h2>
                 @if(session('msj'))
                 <div class="notification alert alert-success" role="alert"> {{ session('msj')}}</div>
                 @endif
@@ -64,8 +63,18 @@
                             
                                 <td>{{ $day->day_week }}</td>
                                 <td>
-                                   <a href="{{action('dayController@edit', $day->id)}}" class="btn btn-default"><em class="fa fa-pencil"></em></a>
-                                    <a href="{{ action('dayController@destroy',$day->id) }}" onclick="return confirm('¿Esta seguro?')"class="btn btn-danger"><em class="fa fa-trash"></em></a>
+                                
+
+                                    @if(date($day->day_week) >=date('Y-m-d'))
+                                         <a href="{{action('DayController@edit', $day->id)}}" class="btn btn-default"><em class="fa fa-pencil"></em></a>
+                                         <a href="{{ url('day/destroy',$day->id) }}" onclick="return confirm('¿Esta seguro?')"class="btn btn-danger"><em class="fa fa-trash"></em></a>
+                                    @else 
+                                    No se puede modificar  
+
+                                    @endif
+                                    
+                                    
+                                    
                                 </td>
                                
                             </tr>
