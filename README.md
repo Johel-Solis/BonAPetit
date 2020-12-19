@@ -11,7 +11,7 @@ Programa Ingeniería de Sistemas
 
 Proyecto : BonApetit
 
-
+Enlace al blog del proyecto: https://restaurantebonapetit.blogspot.com/
 
 
 ### Integrantes
